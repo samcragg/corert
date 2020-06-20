@@ -1,0 +1,27 @@
+version: 1.0.{build}
+configuration: Release
+image:
+  - Visual Studio 2019
+  - Ubuntu2004
+
+branches:
+  only: [ autocrat ]
+
+install:
+  - sh: |
+      sudo ln -s $(command -v llvm-ar-10) /usr/bin/llvm-ar
+      sudo ln -s $(command -v llvm-link-10) /usr/bin/llvm-link
+      sudo ln -s $(command -v llvm-nm-10) /usr/bin/llvm-nm
+      sudo ln -s $(command -v llvm-objdump-10) /usr/bin/llvm-objdump
+
+build_script:
+  - cmd: |
+      cd autocrat_build
+      .\build.cmd
+  - sh: |
+      cd autocrat_build
+      ./build.sh
+
+artifacts:
+  - path: autocrat_build/publish
+    name: PackageFiles
