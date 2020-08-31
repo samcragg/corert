@@ -9,15 +9,12 @@ set(COMMON_RUNTIME_SOURCES
     eetype.cpp
     EHHelpers.cpp
     event.cpp
-    FinalizerHelpers.cpp
-    GCHelpers.cpp
     gctoclreventsink.cpp
     gcheaputilities.cpp
     GCMemoryHelpers.cpp
     gcrhenv.cpp
     gcrhscan.cpp
     GcStressControl.cpp
-    HandleTableHelpers.cpp
     MathHelpers.cpp
     MiscHelpers.cpp
     TypeManager.cpp
@@ -53,6 +50,10 @@ set(COMMON_RUNTIME_SOURCES
     ../gc/handletablecore.cpp
     ../gc/handletablescan.cpp
     ../gc/objecthandle.cpp
+
+    ../shims/finalizer_helpers.cpp
+    ../shims/gc_helpers.cpp
+    ../shims/handle_helpers.cpp
 )
 
 set(SERVER_GC_SOURCES
@@ -206,7 +207,6 @@ else()
 endif()
 
 list(APPEND RUNTIME_SOURCES_ARCH_ASM
-  ${ARCH_SOURCES_DIR}/AllocFast.${ASM_SUFFIX}
   ${ARCH_SOURCES_DIR}/CallDescrWorker.${ASM_SUFFIX}
   ${ARCH_SOURCES_DIR}/CallingConventionConverterHelpers.${ASM_SUFFIX}
   ${ARCH_SOURCES_DIR}/ExceptionHandling.${ASM_SUFFIX}
