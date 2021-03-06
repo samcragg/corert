@@ -65,10 +65,78 @@ public:
 #include "poppack.h"
 #endif
 
+COOP_PINVOKE_HELPER(Boolean, RhCancelFullGCNotification, ())
+{
+    return Boolean_true;
+}
+
+COOP_PINVOKE_HELPER(Int64, RhGetAllocatedBytesForCurrentThread, ())
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int64, RhGetCurrentObjSize, ())
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int64, RhGetGCNow, ())
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int64, RhGetGCSegmentSize, ())
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int32, RhGetLohCompactionMode, ())
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int64, RhGetLastGCDuration, (Int32 generation))
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int64, RhGetLastGCStartTime, (Int32 generation))
+{
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int32, RhGetMaxGcGeneration, ())
+{
+    return 0;
+}
+
 COOP_PINVOKE_HELPER(void, RhGetMemoryInfo, (RH_GH_MEMORY_INFO* pData, int kind))
 {
     ((void)kind);
     *pData = {};
+}
+
+COOP_PINVOKE_HELPER(Int32, RhGetGcCollectionCount, (Int32 generation, Boolean getSpecialGCCount))
+{
+    ((void)generation);
+    ((void)getSpecialGCCount);
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int32, RhGetGeneration, (OBJECTREF obj))
+{
+    ((void)obj);
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int32, RhGetGcLatencyMode, ())
+{
+    return 0;
+}
+
+EXTERN_C REDHAWK_API Int64 __cdecl RhGetTotalAllocatedBytesPrecise()
+{
+    return 0;
 }
 
 EXTERN_C REDHAWK_API void __cdecl RhpCollect(UInt32 uGeneration, UInt32 uMode)
@@ -85,6 +153,17 @@ EXTERN_C REDHAWK_API Int32 __cdecl RhpEndNoGCRegion()
 EXTERN_C REDHAWK_API Int64 __cdecl RhpGetGcTotalMemory()
 {
     return 0;
+}
+
+COOP_PINVOKE_HELPER(Boolean, RhIsPromoted, (OBJECTREF obj))
+{
+    ((void)obj);
+    return Boolean_false;
+}
+
+COOP_PINVOKE_HELPER(Boolean, RhIsServerGc, ())
+{
+    return Boolean_false;
 }
 
 COOP_PINVOKE_HELPER(Array*, RhpNewArray, (EEType* pArrayEEType, int numElements))
@@ -126,13 +205,56 @@ EXTERN_C REDHAWK_API Int32 __cdecl RhpStartNoGCRegion(Int64 totalSize, Boolean h
     return 0;
 }
 
+COOP_PINVOKE_HELPER(Boolean, RhRegisterGcCallout, (GcRestrictedCalloutKind eKind, void * pCallout))
+{
+    ((void)eKind);
+    ((void)pCallout);
+    return Boolean_true;
+}
+
 COOP_PINVOKE_HELPER(Boolean, RhReRegisterForFinalize, (OBJECTREF refObj))
 {
     ((void)refObj);
     return Boolean_true;
 }
 
+COOP_PINVOKE_HELPER(Boolean, RhRegisterForFullGCNotification, (Int32 maxGenerationThreshold, Int32 largeObjectHeapThreshold))
+{
+    ((void)maxGenerationThreshold);
+    ((void)largeObjectHeapThreshold);
+    return Boolean_true;
+}
+
+COOP_PINVOKE_HELPER(Int32, RhSetGcLatencyMode, (Int32 newLatencyMode))
+{
+    ((void)newLatencyMode);
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(void, RhSetLohCompactionMode, (Int32 newLohCompactionMode))
+{
+    ((void)newLohCompactionMode);
+}
+
 COOP_PINVOKE_HELPER(void, RhSuppressFinalize, (OBJECTREF refObj))
 {
     ((void)refObj);
+}
+
+COOP_PINVOKE_HELPER(void, RhUnregisterGcCallout, (GcRestrictedCalloutKind eKind, void* pCallout))
+{
+    ((void)eKind);
+    ((void)pCallout);
+}
+
+COOP_PINVOKE_HELPER(Int32, RhWaitForFullGCApproach, (Int32 millisecondsTimeout))
+{
+    ((void)millisecondsTimeout);
+    return 0;
+}
+
+COOP_PINVOKE_HELPER(Int32, RhWaitForFullGCComplete, (Int32 millisecondsTimeout))
+{
+    ((void)millisecondsTimeout);
+    return 0;
 }
